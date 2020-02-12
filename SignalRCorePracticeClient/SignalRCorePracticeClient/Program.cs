@@ -20,7 +20,10 @@ namespace SignalRCorePracticeClient
 
             //クライアント側の受信時の処理を行うメソッドを登録する。
             //文字列で指定した名前でサーバー側から呼び出される。
-            connection.On<string>("ReceiveMessage", ReceiveMessageClient);
+            connection.On<string>("ReceiveMessage", (string messageFromServer) =>
+            {
+                Console.WriteLine($"サーバーから{DateTimeOffset.Now.ToString("yyyy/MM/dd/HH:mm:ss.fff")}に受信:\n {messageFromServer}");
+            });
 
             try
             {
